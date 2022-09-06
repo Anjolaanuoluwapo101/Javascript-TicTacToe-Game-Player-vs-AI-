@@ -1,0 +1,65 @@
+html,body{
+  padding:0;
+  overflow: 0;
+  margin:0;
+  width:100%;
+  height:100%;
+}
+
+#tictactoe{
+  width:90%;
+  margin-top:100px;
+  margin-left:5%;
+  
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  
+}
+
+.boxes{
+  width:32%;
+  height:100px;
+  border:1px solid silver  ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight:900;
+  font-size:24px;
+}
+
+.boxes:hover{
+  background:rgba(128,128,128,0.3) ;
+}
+
+#o{
+color:red;  
+}
+
+#x{
+  color:blue;
+}
+
+#symbol{
+  width:80%;
+  margin-left:10%;
+  
+}
+
+#whoseTurn{
+  margin-left:20%;
+  width:60%;
+  display:flex;
+  flex-direction: column;
+  flex-wrap:nowrap;
+  
+}
+
+#whoseTurn div{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+  font-weight: 900;
+}
+

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/style.css">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`</title>
+    
+  </head>
+  <body>
+    
+    <div style="margin-top:40px;margin-left:20%">
+    <button onclick="document.getElementById('aboutUs').style.display='block' " style="width:30%">About Us</button>
+    <br>
+    <div id="aboutUs" style="padding:16px;width:80%;height:auto;background:rgba(128,128,128,0.2);display:none">
+      *The idea behind this side project was to create a small automated client side bot(or AI)
+     from SCRATCH using the basic principles of Javascript classes and async/await syntatic sugar without any framework at all 
+     to order certain class methods
+     <br>
+     <br>
+     *The major aim of this side project is to possibly determine most moves that can be made by 
+     a human opponent of a tictactoe game and simply counter it to a stalemate.They're limitations to this
+     if the opponent starts a round and not the opponent
+     <br>
+     <br>
+     *The bot offers a varying difficulty level to prevent walkover scenarios
+     <br>
+     <br>
+     *The difficulty posed by this bot can be reduced/increased in further versions by simply changing the ordering
+     in which bot(AI) uses.
+    </div>
+    </div>
+    
+    <br>
+    <br>
+    <br>
+    
+    <div id="tictactoe">
+    
+    </div>
+    
+   <br> 
+   <br>
+   
+   <select onchange="hideMe()"  id="symbol">
+     <option value="">Choose Symbol</option>
+     <option value="<span id='x'>X</span>">X</option>
+     <option value="<span id='o'>O</span>">O</option>
+   </select>
+   
+   <br>
+   <br>
+  
+    
+    <div id="whoseTurn" >
+      <div id="yourTurn">YOUR TURN</div>
+      <div id="aiTurn">AI TURN</div>
+    </div> 
+    
+    
+    <script src="js/script.js" >
+      
+    </script>
+  </body>
+</html>
