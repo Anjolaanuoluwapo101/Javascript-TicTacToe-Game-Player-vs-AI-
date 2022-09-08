@@ -349,10 +349,6 @@ class TicTacToeBoard
   //this method only runs if the ai is not starting the round
   //this method becomez the firstMove of the ai IF  opponent plays in certain places (this.corner_boxes)
   async ai_firstMove_if_Not_Starting_A_Round() {
-    /* this.center_box = "1.1";
-    document.getElementById(this.center_box).innerHTML = this.ai_symbol;
-    this.update_AI_Brain(this.center_box,"AI");
-  */
     this.lucky_pick = this.shuffle(this.horizontal_boxes_2);
     document.getElementById(this.lucky_pick[1]).innerHTML = this.ai_symbol;
     this.update_AI_Brain(this.lucky_pick[1], "AI");
