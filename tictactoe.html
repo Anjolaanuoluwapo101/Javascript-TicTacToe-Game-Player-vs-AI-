@@ -4,13 +4,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/style.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>`substitute(Filename('', 'Page Title'), '^.', '\u&', '')`</title>
+    <title>Intelligent tictactoe</title>
     
   </head>
   <body>
     
     <div style="margin-top:40px;margin-left:20%">
-    <button onclick="document.getElementById('aboutUs').style.display='block' " style="width:30%">About Us</button>
+    <button onclick="hideAboutUs()" style="width:30%">About Us</button>
     <br>
     <div id="aboutUs" style="padding:16px;width:80%;height:auto;background:rgba(128,128,128,0.2);display:none">
       *The idea behind this side project was to create a small automated client side bot(or AI)
@@ -19,8 +19,8 @@
      <br>
      <br>
      *The major aim of this side project is to possibly determine most moves that can be made by 
-     a human opponent of a tictactoe game and simply counter it to a stalemate.They're limitations to this
-     if the opponent starts a round and not the opponent
+     a human opponent in a tictactoe game and simply counter it to a stalemate.They're limitations to this
+     if the opponent starts a round and not the AI
      <br>
      <br>
      *The bot offers a varying difficulty level to prevent walkover scenarios
@@ -33,6 +33,12 @@
     
     <br>
     <br>
+    <div id="keepTrackOfScores">
+      <div id="winTimes" style="background:rgba(0,255,0,0.2)"></div>
+      <div  id="drawTimes" style="background:rgba(128,128,128,0.2)"></div>
+      <div id="loseTimes" style="background:rgba(255,0,0,0.2)"></div>
+    </div>
+    
     <br>
     
     <div id="tictactoe">
@@ -58,8 +64,8 @@
     </div> 
     
     
-    <script src="js/script.js" >
+    <script src="js/cookie.js" ></script>
+    <script src="js/script.js" ></script>
       
-    </script>
   </body>
 </html>
