@@ -25,39 +25,19 @@ class TicTacToeBoard
     }
 
     //this array contains the id of the boxes...
-    this.boxes = ["0.0",
-      "0.1",
-      "0.2",
-      "1.0",
-      "1.1",
-      "1.2",
-      "2.0",
-      "2.1",
-      "2.2"];
+    this.boxes = ["0.0","0.1","0.2","1.0","1.1","1.2","2.0","2.1","2.2"];
 
     //this array contains the id of diagonal boxes
-    this.diagonalBoxes = ["0.0",
-      "0.2",
-      "1.1",
-      "2.0",
-      "2.2"];
+    this.diagonalBoxes = ["0.0","0.2","1.1","2.0","2.2"];
 
-    //this array contains ids of the boxes in a plus
-    this.plusBoxes = ["0.1",
-      "1.0",
-      "1.2",
-      "2.1"];
+    /*//this array contains ids of the boxes in a plus
+    this.plusBoxes = ["0.1","1.0","1.2","2.1"];
 
     //this array contains the ids of corner boxes(vital for ai_firstMove_if_Not_Starting_A_Round())
-    this.corner_boxes = ["0.0",
-      "0.2",
-      "2.0",
-      "2.2"];
+    this.corner_boxes = ["0.0","0.2","2.0","2.2"];
 
     //this array contains the ids of the 2nd horizontal boxes
-    this.horizontal_boxes_2 = ["1.0",
-      "1.1",
-      "1.2"];
+    this.horizontal_boxes_2 = ["1.0","1.1","1.2"];
 
 
     /*next is to initialize the ai brain,the first three child array
@@ -67,30 +47,9 @@ class TicTacToeBoard
     */
 
     this.brain = [
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0]];
+      [0,0,0],[0,0,0],[0,0,0],
+      [0,0,0],[0,0,0],[0,0,0],
+      [0,0,0],[0,0,0]];
 
     //start game and then start ai with aiMove() method.
     this.game();
@@ -171,10 +130,7 @@ class TicTacToeBoard
       //next we pick the last element in this array since it has been shuffled.
       document.getElementById(position[8]).innerHTML = this.ai_symbol;
       this.update_AI_Brain(position[8], "AI");
-      //this else if block runs if the opponent plays first and in one of the corner boxes
-      //then it leaves just 8 boxes available
-      //if the opponent first move is either in of the diagonal boxes(except the center box) or one of the plus boxes(except the center box)
-      //this forces the ai to play in the middle
+
     } else if (count < 9 && count != 0) {
       //this block logically tries to check which box to play in by passing some values to AIperformsMemoryCheck method
 
@@ -199,7 +155,7 @@ class TicTacToeBoard
 
       aiGuess = await this.AIperformsMemoryCheck(2, 1); //passing 2,1 allows to ai to play in any row that only itself has plaed once and the opponent has not played there before
       if (aiGuess != undefined) {
-        //if the statement gets to this point...it means there is a possibility for that move and goes ahead to skio this function block to register that move
+        //if the statement gets to this point...it means there is a possibility for that move and goes ahead to skip this function block to register that move
         return this.update_AI_Brain(aiGuess, "AI");
       } else {
         //at this point...it means that round is coming to an end and there may not be any winner so thr ai just plays in a spot that is empty with playRandom function
@@ -230,7 +186,7 @@ class TicTacToeBoard
       this.memoryMap = this.opponent_symbolValue;
       this.opponent_lastMove = Axes; //tells the ai about the opponent last move(vital to check if the opponent is setting up two ways)
     }
-    //we also need to update the brain of the ai,to remember that it made a move and the opponent did too
+    //we also need to update the brain of the ai,to remember that it either made a move OR the opponent did too
     //the id of these divs are consists of two numbers seperated by a delimiter(.)
     //the first number represents the position of the row/column where the box his found..
     //the second number represents the position(ordering) the box in that row/column
@@ -310,16 +266,18 @@ class TicTacToeBoard
     //player == ai then we check if an array in the ai brain is completely filled with only 2's
     if (player == "AI") {
       for (let eachArray of this.brain) {
-        //we get each array in the ai brain and check if one of them is comoletely filled with 2s,if found it means the ai has won
+        //we get each array in the ai brain and check if one of them is completely filled with 2s,if found it means the ai has won
         if (eachArray.every(this.checkForRepeating2s)) {
           alert("AI WINS");
           this.opponent_lastMoves = []; //reset the array that temporarily stores the opponent moves
           await this.sleep(2000); //delay the AI to allow the opponent see the winner
 
-          await this.updateScores("lose");
-          this.brain = this.refreshBrain();
+          await this.updateScores("lose");//update the score cookie and score board in the GUI
+          this.brain = this.refreshBrain();//refeshes the AI brain and clear current data
           this.buildBoard(); //rebuilds the board
           this.turn = "opponent";
+          
+          //we then update the GUI to tell whose turn is next
           document.getElementById("yourTurn").style.display = "block"
           document.getElementById("aiTurn").style.display = "none"
           return true;
@@ -328,33 +286,25 @@ class TicTacToeBoard
       }
     } else if (player == "opponent") {
       for (let eachArray of this.brain) {
-        //we get each array in the ai brain
+        //we get each array in the AI to check if an array is completely filled with 1's 
         if (eachArray.every(this.checkForRepeating1s)) {
           alert("YOU WIN!!!");
           await this.storeUserMoves(this.opponent_lastMoves); //if the opponent wins,the AI permanently stores the winning move here
           this.opponent_lastMoves = [];
           await this.sleep(2000)//delay the AI to allow the opponent see the winner
 
-          await this.updateScores("win")
-          this.brain = this.refreshBrain();
+          await this.updateScores("win");//update the score cookie and score board in the GUI
+          this.brain = this.refreshBrain();//refeshes the AI brain and clear current data
           this.buildBoard(); //rebuilds the board
           this.turn = "AI";
+          
+          //we then update the GUI to tell who is next
           document.getElementById("yourTurn").style.display = "none"
           document.getElementById("aiTurn").style.display = "block"
         }
       }
     }
   }
-
-  //this method only runs if the ai is not starting the round
-  //this method becomez the firstMove of the ai IF  opponent plays in certain places (this.corner_boxes)
-  async ai_firstMove_if_Not_Starting_A_Round() {
-    this.lucky_pick = this.shuffle(this.horizontal_boxes_2);
-    document.getElementById(this.lucky_pick[1]).innerHTML = this.ai_symbol;
-    this.update_AI_Brain(this.lucky_pick[1], "AI");
-
-  }
-
 
   //makeshift sleep() function,works only in an async function
   sleep(ms) {
@@ -400,8 +350,7 @@ class TicTacToeBoard
     let exclude; //the exeception that the array must bot contains
     let currentChildArray = -1; //gets the index of the current array,since arrays are zero index we still need to subtract 1 from the value of this
     let currentElemInChildArray = -1; //gets the index of the current child array element(an array is zero indexed so starting from -1 ensures that )
-    let condition1,
-    condition2; //variables that stores the condition return value
+    let condition1,condition2; //variables that stores the condition return value
 
     /*
     NOTE:THE NUMBERS ARE JUST FOR DIFFERENTING BETWEEM THE FUNCTIONALITY !
@@ -526,31 +475,9 @@ class TicTacToeBoard
 
   //refreshes the brain of the ai after a round
   refreshBrain() {
-    return [
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0],
-      [0,
-        0,
-        0]];
+    return [[0,0,0],[0,0,0],
+     [0,0,0],[0,0,0],[0,0,0],
+     [0,0,0],[0,0,0],[0,0,0]];
   }
 
   //this method just sums a array
@@ -580,6 +507,7 @@ class TicTacToeBoard
 
   //next is to create functions that check for two ways
   async storeUserMoves(opponentWinningMoves) {
+    let check =0;//this variable will be usee later
     if (!localStorage.getItem("storeOpponentMoves")) {
       let opponentMoves = [];
       opponentMoves.push(opponentWinningMoves);
@@ -587,14 +515,21 @@ class TicTacToeBoard
     } else if (localStorage.getItem("storeOpponentMoves")) {
       let opponentMoves = localStorage.getItem("storeOpponentMoves");
       opponentMoves = JSON.parse(opponentMoves);
-      opponentMoves.push(opponentWinningMoves);
-      localStorage.setItem("storeOpponentMoves", JSON.stringify(opponentMoves));
+      //this for loop prevents the AI from storing tthe same winning move if it is already stored before
+      for(let move of opponentMoves){
+        if(JSON.stringify(move) === JSON.stringify(opponentWinningMoves)){
+        check = 1;
+        }
+      }
+      if(check != 1 ){
+        opponentMoves.push(opponentWinningMoves);
+        localStorage.setItem("storeOpponentMoves", JSON.stringify(opponentMoves));
+      }
     }
   }
 
   async predictUser(currentMoveSet) {
     if (!localStorage.getItem("storeOpponentMoves")) {
-      alert("no moves stored yet")
       return false;
     }
 
@@ -602,7 +537,6 @@ class TicTacToeBoard
     let identicalMoves = [];
     let opponentMoves = JSON.parse(localStorage.getItem("storeOpponentMoves"));
     if (opponentMoves.length == 0) {
-      alert("no moves found in move unit")
       return false;
     } else {
 
@@ -615,7 +549,7 @@ class TicTacToeBoard
       }
     }
 
-    let identicalMovesShuffled = shuffle(identicalMoves);
+    let identicalMovesShuffled = this.shuffle(identicalMoves);
     if (identicalMovesShuffled.length != 0) {
       return String(identicalMovesShuffled[0][setLength]);
     } else {
@@ -626,15 +560,12 @@ class TicTacToeBoard
 
 }//end of class
 
- //since the user starts first...
+ //since the user starts first...we hide AITURN from the GUI
 document.getElementById('aiTurn').style.display = "none";
 
 
 function startGame() {
-  let winResult,
-  drawResult,
-  loseResult;
-  //Since human always start first
+  let winResultdrawResult,loseResult;
 
   //we load the previous results from here
   winResult = getCookie("TicTacWin");
@@ -669,7 +600,6 @@ function hideMe() {
   document.getElementById('symbol').style.display = "none"
 }
 
-//load results
 
 function hideAboutUs() {
   let status = document.getElementById('aboutUs').style.display;
