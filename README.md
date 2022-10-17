@@ -4,19 +4,24 @@
 
 
 
-     The idea behind this side project was to create a small automated client side AI from SCRATCH using the basic principles of Javascript classes and async/await syntatic sugar without any third-party framework to order certain class methods.A quick look at the code shows that it's largely dependent on the await keyword because we need to ascertain that a method has been completed before the AI(code) moves unto the next,please understand that I only learnt Promises several hours before writing this project.Having said this,please permit any form of non professionalism.
+ The idea behind this side project was to create a small automated client side AI 
+from SCRATCH using the basic principles of Javascript classes and async/await syntatic
+ sugar without any third-party framework to order certain class methods.A quick look at
+ the code shows that it's largely dependent on the await keyword because we need to ascertain 
+that a method has been completed before the AI(code) moves unto the next,please understand that
+ I only learnt Promises several hours before writing this project.Having said this,please permit
+ any form of non professionalism.
 
-
-    The major aim of this side project is to possibly determine moves that can be made by a human opponent in a tictactoe game and simply counter it to a stalemate,there's possibility the AI wins from time to time but against a skilled opponent,the AI will rely on it ability to stalemate.There's limitations to this if the opponent starts a round and not the AI.The bot offers a varying difficulty level to prevent walkover scenarios as you continue playing against it.The difficulty posed by this bot can be reduced/increased in further versions by simply changing the ordering in which bot(AI) uses.
+The major aim of this side project is to possibly determine moves that can be made by a human opponent in a tictactoe game and simply counter it to a stalemate,there's possibility the AI wins from time to time but against a skilled opponent,the AI will rely on it ability to stalemate.There's limitations to this if the opponent starts a round and not the AI.The bot offers a varying difficulty level to prevent walkover scenarios as you continue playing against it.The difficulty posed by this bot can be reduced/increased in further versions by simply changing the ordering in which bot(AI) uses.
 
 ABOUT THE GUI
 
 The GUI is a CSS flex box with 9 smaller boxes,each of this boxes are ID-ed in a unique way
 
-   0       1        2
-0  _____|_____|______
-1  _____|_____|______
- 2 _____|_____|______
+        0      1      2
+    0  _____|_____|______
+    1  _____|_____|______
+    2  _____|_____|______
 
 So basically, the first box has an id of 0.0,second box(1.0),third box(0.2),fourth box(1.0),fifth box(1.1) e.t.c.The boxes are counted horizontally.
 
@@ -32,7 +37,6 @@ If you notice they're 8 rows of 3 boxes that can be filled for you/your opponent
 
 Each represented that in a multidimensional array.
 Here's an example 
-
 [
 [0,0,0], //1st horizontal row
 
